@@ -1,0 +1,4 @@
+/demo/login /demo/login/index.html 200
+/demo/dashboard /demo/dashboard/index.html 200
+/demo /demo/login 302
+/ /demo/login 302

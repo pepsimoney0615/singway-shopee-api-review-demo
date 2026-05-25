@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - SingWay WMS Shopee Connector</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="intro-card">
+      <span class="badge">Shopee API Review Demo</span>
+      <h1>SingWay WMS Shopee Connector</h1>
+      <p>This is a live demo environment for Shopee Open Platform review. All data is demo data.</p>
+      <div class="review-note">
+        <div>No production WMS database, upload folder, spreadsheet, token, API key or partner key is connected.</div>
+        <div>The system does not perform scraping, simulated login, CAPTCHA bypassing, browser automation or unofficial data extraction.</div>
+        <div>All orders, buyer details, logistics numbers, product records and API logs are fake and masked.</div>
+      </div>
+    </section>
+
+    <section class="login-card" aria-label="Reviewer login">
+      <div class="brand">
+        <span class="brand-mark">SW</span>
+        <span>
+          <strong>SingWay WMS Shopee Connector</strong>
+          <span>Shopee API Review Demo</span>
+        </span>
+      </div>
+      <h2>Reviewer Login</h2>
+      <p>Use the provided Shopee review account to open the static dashboard.</p>
+      <div class="error" data-login-error></div>
+      <form data-login-form>
+        <label>
+          Email
+          <input name="email" type="email" autocomplete="username" required>
+        </label>
+        <label>
+          Password
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Login</button>
+      </form>
+    </section>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

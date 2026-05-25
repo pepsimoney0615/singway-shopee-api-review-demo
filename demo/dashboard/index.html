@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - SingWay WMS Shopee Connector</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-requires-auth>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">SW</span>
+        <span>
+          <strong>SingWay WMS</strong>
+          <span>Shopee API Review Demo</span>
+        </span>
+      </div>
+      <nav class="nav" aria-label="Dashboard sections">
+        <a class="active" href="#integration">Shopee Integration</a>
+        <a href="#shops">Connected Shop Management</a>
+        <a href="#orders">Order Synchronization Demo</a>
+        <a href="#sku">Product Master / SKU Mapping</a>
+        <a href="#inventory">Inventory Control</a>
+        <a href="#picking">Picking Tasks</a>
+        <a href="#shipment">Shipment Workflow</a>
+        <a href="#logistics">Logistics Tracking</a>
+        <a href="#logs">API Sync Logs</a>
+        <a href="#security">Security & Privacy Controls</a>
+      </nav>
+      <button class="logout-button" type="button" data-logout>Logout</button>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <span class="badge">Shopee API Review Demo</span>
+        <h1>SingWay WMS Shopee Connector</h1>
+        <p>This is a live demo environment for Shopee Open Platform review. All data is demo data.</p>
+        <p>The system does not perform scraping, simulated login, CAPTCHA bypassing, browser automation or unofficial data extraction.</p>
+      </header>
+
+      <section class="metrics" aria-label="Demo metrics">
+        <div class="metric"><span>Connected demo shops</span><strong>3</strong></div>
+        <div class="metric"><span>Fake orders</span><strong>3</strong></div>
+        <div class="metric"><span>Fake SKU records</span><strong>3</strong></div>
+        <div class="metric"><span>Production writes</span><strong>0</strong></div>
+      </section>
+
+      <div class="section-grid">
+        <section class="section" id="integration">
+          <h2>Shopee Integration</h2>
+          <p>Planned integration through Shopee Open Platform official authorization. This static demo does not call the real Shopee API.</p>
+          <ol class="steps">
+            <li><strong>Seller authorization</strong><p>Seller must authorize through Shopee Open Platform before data access.</p></li>
+            <li><strong>Authorization code exchange</strong><p>The backend exchanges the authorization code after redirect validation.</p></li>
+            <li><strong>Token handling</strong><p>Access token and refresh token handling is designed to be backend-only and scoped per shop or merchant.</p></li>
+            <li><strong>First phase privacy</strong><p>No unmasked PII permission requested in the first phase.</p></li>
+          </ol>
+        </section>
+
+        <section class="section" id="shops">
+          <h2>Connected Shop Management</h2>
+          <p>Fake shop connection records used to show how sellers would manage authorized shops.</p>
+          <div class="module-grid">
+            <div class="module-card"><h3>Demo Shop A</h3><p>Authorized demo shop. Order sync enabled, inventory sync in review mode.</p></div>
+            <div class="module-card"><h3>Demo Shop B</h3><p>Authorized demo shop. Product and logistics modules enabled.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="orders">
+          <h2>Order Synchronization Demo</h2>
+          <p>Masked fake orders showing how Shopee order data becomes WMS work items.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order No</th><th>Shop</th><th>Status</th><th>Buyer</th><th>Address</th><th>Picking Status</th></tr></thead>
+              <tbody id="order-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="sku">
+          <h2>Product Master / SKU Mapping</h2>
+          <p>Demo matching between Shopee seller SKUs and WMS product master records.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Shopee SKU</th><th>Variation</th><th>WMS Product Code</th><th>Match Status</th></tr></thead>
+              <tbody id="sku-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="inventory">
+          <h2>Inventory Control</h2>
+          <p>Demo inventory policy: SKU mapping must be reviewed before any stock sync decision. Numbers shown here are fake.</p>
+          <div class="module-grid">
+            <div class="module-card"><h3>Available stock</h3><p>Demo quantity: 128 units.</p></div>
+            <div class="module-card"><h3>Reserved stock</h3><p>Demo quantity: 14 units reserved by fake orders.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="picking">
+          <h2>Picking Tasks</h2>
+          <p>Fake picking batches created after masked Shopee orders are imported and mapped to WMS product codes.</p>
+          <div class="module-grid">
+            <div class="module-card"><h3>DEMO-PICK-001</h3><p>12 orders, 38 items, Zone A, status In progress.</p></div>
+            <div class="module-card"><h3>DEMO-PICK-002</h3><p>8 orders, 21 items, Zone B, status Pending.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="shipment">
+          <h2>Shipment Workflow</h2>
+          <p>Demo workflow from order import to picking, packing, label readiness and shipment handoff.</p>
+          <ol class="steps">
+            <li><strong>Import</strong><p>Masked demo order enters WMS.</p></li>
+            <li><strong>Pick</strong><p>Picking task is assigned.</p></li>
+            <li><strong>Pack</strong><p>Items are packed by demo status.</p></li>
+            <li><strong>Ship</strong><p>Demo logistics status is updated.</p></li>
+          </ol>
+        </section>
+
+        <section class="section" id="logistics">
+          <h2>Logistics Tracking</h2>
+          <p>Fake logistics examples only. No real tracking number or shipment label is displayed.</p>
+          <div class="module-grid">
+            <div class="module-card"><h3>DEMO-TRACK-001</h3><p>Shopee Xpress Demo, status READY_TO_SHIP.</p></div>
+            <div class="module-card"><h3>DEMO-TRACK-002</h3><p>Demo Convenience Store, status PICKUP_DONE.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="logs">
+          <h2>API Sync Logs</h2>
+          <p>All request IDs and API results are fake examples for Shopee Open Platform review.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Time</th><th>API Action</th><th>Result</th><th>Request ID</th><th>Message</th></tr></thead>
+              <tbody id="api-log-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="security">
+          <h2>Security & Privacy Controls</h2>
+          <div class="module-grid">
+            <div class="module-card"><h3>Least privilege</h3><p>Only required permissions are requested for the first-phase workflows.</p></div>
+            <div class="module-card"><h3>No unmasked PII</h3><p>Unmasked sensitive buyer data is not requested in the first phase.</p></div>
+            <div class="module-card"><h3>Backend-only credentials</h3><p>API credentials are not exposed to frontend pages in the production design.</p></div>
+            <div class="module-card"><h3>Audit visibility</h3><p>Sync logs and operator actions are planned for production traceability.</p></div>
+          </div>
+          <div class="callout">Demo data only. No production database, production uploads, real Shopee API request, token, secret, buyer PII, order number, shipment number or product image is included.</div>
+        </section>
+      </div>
+
+      <footer class="footer">Demo environment only. All data shown here is fake and masked for review purposes.</footer>
+    </main>
+  </div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
