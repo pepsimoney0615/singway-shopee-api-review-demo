@@ -2,17 +2,23 @@
 
 ## Purpose
 
-This project is a standalone static review environment for Shopee Open Platform profile and API review. It presents SingWay ERP/WMS as a read-only product environment with multi-marketplace order workflow demos, WMS fulfillment, inbound receiving, SKU mapping, inventory control, picking, logistics, staff productivity and security controls.
+This project is a standalone static review environment for Shopee Open Platform profile and API review. It presents SingWay ERP/WMS as a read-only product environment with multi-marketplace order workflow, WMS fulfillment, inbound receiving, SKU mapping, inventory control, picking, logistics tracking, staff productivity and security controls.
 
-The site is designed for Cloudflare Pages deployment so reviewers can open a stable HTTPS URL without depending on a local computer or Cloudflare Quick Tunnel.
+The site is designed for Cloudflare Pages deployment so reviewers can open a stable HTTPS URL without depending on a local computer or a temporary tunnel.
 
-## Review URL
+## Review Environment v2
 
-Cloudflare Pages review URL format:
+The review environment demonstrates:
 
-```text
-https://<your-cloudflare-pages-domain>/demo/login/
-```
+- Marketplace Integration Center
+- Other Marketplace Orders
+- Product Master / SKU Mapping
+- Inbound / Receiving Management
+- Warehouse / Location Management
+- Outbound / Picking Management
+- Staff Efficiency Management
+- Import / Sync Logs
+- Security & Privacy Center
 
 Required paths:
 
@@ -20,6 +26,17 @@ Required paths:
 /demo/login/
 /demo/dashboard/
 ```
+
+## Demo and De-identified Review Dataset
+
+This review environment uses demo and de-identified review datasets.
+
+- Buyer information, order identifiers, addresses, phone numbers, and logistics numbers are masked or anonymized for review safety.
+- Phone values use masked examples such as `09********`.
+- Address values are city-only examples.
+- Order IDs, request IDs, SKU values, product names, purchase batches and tracking-like identifiers are review identifiers.
+- Staff names and supplier names are role-based review labels.
+- No production database, live API credentials, or unmasked PII is exposed.
 
 ## Test Account
 
@@ -35,45 +52,24 @@ Reviewer password:
 ShopeeReview2026!
 ```
 
-The account is simulated by frontend JavaScript and is intended only for read-only review.
+The account is a static review gate and is intended only for read-only product evaluation.
 
-## Security Limitations
+## Other Marketplace Integration Workflow
 
-- Static website only.
-- No production database connection.
-- No production upload folder or export folder.
-- No real Shopee, Lazada, Ruten or Amazon API call.
-- No production API credential, partner key, API key or secret key.
-- No real buyer identity, real order, real phone number, full address, real logistics number or real product image.
-- No write, delete, export or production mutation feature.
-- Review account can only view demo pages.
-- Official API authorization only in production design.
-- No scraping, no CAPTCHA bypass and no unofficial data extraction.
+The review environment includes Lazada, Ruten and Amazon marketplace workflow demonstrations to show that the ERP/WMS product supports cross-platform order normalization, SKU mapping, inventory control and warehouse fulfillment concepts.
 
-## Data Masking Policy
-
-All review records are demo data or masked data:
-
-- Buyer name examples use masked display such as `Buyer L****`.
-- Phone values use `Masked phone`.
-- Address values are city-only examples.
-- Order IDs, request IDs, SKU values, product names, purchase batches and tracking-like identifiers are demo identifiers.
-- Staff names and supplier names are demo names.
-
-## Other Marketplace Integration Explanation
-
-The review environment includes Lazada, Ruten and Amazon marketplace workflow demos to show that the ERP/WMS product supports cross-platform order normalization, SKU mapping, inventory control and warehouse fulfillment concepts.
-
-These records are demo marketplace records. The site does not claim production authorization for these marketplaces and does not call their real APIs.
+These are demo and de-identified review datasets. The site does not claim production API authorization for these marketplaces and does not call their live APIs.
 
 Recommended wording used in the UI:
 
 - Lazada marketplace integration demo
-- Cross-platform marketplace order workflow
-- Demo marketplace records
-- Connector design preview
+- Ruten marketplace order integration demo
+- marketplace order integration workflow
+- cross-platform WMS workflow
+- authorized connector ready
+- import / sync log demo
 
-## Shopee API Application Explanation
+## Shopee API Application Context
 
 Shopee is shown as `Pending official API approval`.
 
@@ -83,23 +79,42 @@ The planned production flow is:
 2. The backend validates the redirect and authorization code.
 3. The backend handles access and refresh tokens by shop or merchant scope.
 4. First-phase permissions do not request unmasked PII.
-5. ERP/WMS workflows use official API authorization only.
+5. ERP/WMS workflows use official API authorization only after approval.
 
-The static review environment does not call real Shopee APIs and does not store credentials.
+The static review environment does not call live Shopee APIs and does not store credentials.
 
-## Local Preview
+## Security Limitations
 
-From this folder, run any static file server. For example:
+- Static website only.
+- Read-only review account.
+- No production database connection.
+- No production upload folder, spreadsheet source or export folder.
+- No live Shopee, Lazada, Ruten or Amazon API call.
+- No production API credential, partner key, API key or secret key.
+- No unmasked buyer identity, full phone number, full address, live order number, live logistics number or live product image.
+- No write, delete, export or production mutation feature.
+- Official API authorization only in production design.
+- The system does not perform scraping, simulated login, CAPTCHA bypassing, browser automation or unofficial data extraction.
 
-```bash
-python3 -m http.server 8788
-```
+## No Production DB / No Live Token / No Unmasked PII
 
-Then open:
+This repository and review site must not contain:
 
-```text
-http://127.0.0.1:8788/demo/login/
-```
+- production DB path
+- database files
+- upload folders
+- export folders
+- dependency folders
+- live access token
+- live refresh token
+- API key
+- secret
+- partner key
+- full phone number
+- full address
+- buyer full name
+- live order number
+- live tracking number
 
 ## Cloudflare Pages Deployment
 
@@ -114,4 +129,10 @@ If the Cloudflare Pages project root is already this folder, the build output di
 
 ```text
 .
+```
+
+Review URL format:
+
+```text
+https://<your-cloudflare-pages-domain>/demo/login/
 ```
