@@ -280,6 +280,12 @@ button:hover {
   font-size: 24px;
 }
 
+.metric small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
 .section-grid {
   display: grid;
   gap: 18px;
@@ -302,6 +308,10 @@ button:hover {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 16px;
+}
+
+.module-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .module-card {
@@ -410,6 +420,7 @@ tbody tr:last-child td {
   .login-shell,
   .app,
   .module-grid,
+  .module-grid.three,
   .steps,
   .metrics {
     grid-template-columns: 1fr;

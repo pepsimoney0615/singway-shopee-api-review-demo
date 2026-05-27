@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard - SingWay WMS Shopee Connector</title>
+  <title>Review Environment v2 - SingWay ERP/WMS</title>
   <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body data-requires-auth>
@@ -12,145 +12,159 @@
       <div class="brand">
         <span class="brand-mark">SW</span>
         <span>
-          <strong>SingWay WMS</strong>
-          <span>Shopee API Review Demo</span>
+          <strong>SingWay ERP/WMS</strong>
+          <span>Review Environment v2</span>
         </span>
       </div>
-      <nav class="nav" aria-label="Dashboard sections">
-        <a class="active" href="#integration">Shopee Integration</a>
-        <a href="#shops">Connected Shop Management</a>
-        <a href="#orders">Order Synchronization Demo</a>
+      <nav class="nav" aria-label="Review environment sections">
+        <a class="active" href="#executive">Executive Dashboard</a>
+        <a href="#integrations">Marketplace Integration Center</a>
+        <a href="#orders">Other Marketplace Orders</a>
         <a href="#sku">Product Master / SKU Mapping</a>
-        <a href="#inventory">Inventory Control</a>
-        <a href="#picking">Picking Tasks</a>
-        <a href="#shipment">Shipment Workflow</a>
-        <a href="#logistics">Logistics Tracking</a>
-        <a href="#logs">API Sync Logs</a>
-        <a href="#security">Security & Privacy Controls</a>
+        <a href="#inbound">Inbound / Receiving</a>
+        <a href="#locations">Warehouse / Location</a>
+        <a href="#picking">Outbound / Picking</a>
+        <a href="#staff">Staff Efficiency</a>
+        <a href="#logs">API / Sync Logs</a>
+        <a href="#security">Security & Privacy Center</a>
       </nav>
       <button class="logout-button" type="button" data-logout>Logout</button>
     </aside>
 
     <main class="main">
       <header class="hero">
-        <span class="badge">Shopee API Review Demo</span>
-        <h1>SingWay WMS Shopee Connector</h1>
+        <span class="badge">Review Environment / Demo Data / No Production DB</span>
+        <h1>SingWay ERP/WMS Review Environment v2</h1>
         <p>This is a live demo environment for Shopee Open Platform review. All data is demo data.</p>
         <p>The system does not perform scraping, simulated login, CAPTCHA bypassing, browser automation or unofficial data extraction.</p>
       </header>
 
-      <section class="metrics" aria-label="Demo metrics">
-        <div class="metric"><span>Connected demo shops</span><strong>3</strong></div>
-        <div class="metric"><span>Fake orders</span><strong>3</strong></div>
-        <div class="metric"><span>Fake SKU records</span><strong>3</strong></div>
-        <div class="metric"><span>Production writes</span><strong>0</strong></div>
+      <section class="metrics" id="executive" aria-label="Executive Dashboard">
+        <div class="metric"><span>Marketplace integrations</span><strong>4</strong><small>Shopee pending + other marketplace demos</small></div>
+        <div class="metric"><span>WMS orders</span><strong>128</strong><small>Masked demo order pool</small></div>
+        <div class="metric"><span>Inbound tasks</span><strong>4</strong><small>Receiving and checking workflow</small></div>
+        <div class="metric"><span>Picking progress</span><strong>72%</strong><small>Fulfillment workflow demo</small></div>
+        <div class="metric"><span>Inventory alerts</span><strong>3</strong><small>Low stock and location exceptions</small></div>
+        <div class="metric"><span>Staff productivity</span><strong>117</strong><small>Demo handled units today</small></div>
       </section>
 
       <div class="section-grid">
-        <section class="section" id="integration">
-          <h2>Shopee Integration</h2>
-          <p>Planned integration through Shopee Open Platform official authorization. This static demo does not call the real Shopee API.</p>
-          <ol class="steps">
-            <li><strong>Seller authorization</strong><p>Seller must authorize through Shopee Open Platform before data access.</p></li>
-            <li><strong>Authorization code exchange</strong><p>The backend exchanges the authorization code after redirect validation.</p></li>
-            <li><strong>Token handling</strong><p>Access token and refresh token handling is designed to be backend-only and scoped per shop or merchant.</p></li>
-            <li><strong>First phase privacy</strong><p>No unmasked PII permission requested in the first phase.</p></li>
-          </ol>
+        <section class="section">
+          <h2>Executive Dashboard</h2>
+          <p>SingWay ERP/WMS provides a review-only overview of marketplace order integration, inbound receiving, warehouse location control, inventory monitoring, picking progress, logistics workflow, staff productivity and audit visibility.</p>
+          <div class="module-grid three">
+            <div class="module-card"><h3>Marketplace integrations</h3><p>Cross-platform marketplace order workflow with Shopee planned official API approval and other marketplace demo records.</p></div>
+            <div class="module-card"><h3>WMS fulfillment</h3><p>Orders flow through SKU mapping, inventory reservation, basket picking, shortage review, packing and shipment workflow.</p></div>
+            <div class="module-card"><h3>Operational control</h3><p>Inbound tasks, warehouse locations, productivity metrics and sync logs are displayed with masked demo data.</p></div>
+          </div>
         </section>
 
-        <section class="section" id="shops">
-          <h2>Connected Shop Management</h2>
-          <p>Fake shop connection records used to show how sellers would manage authorized shops.</p>
-          <div class="module-grid">
-            <div class="module-card"><h3>Demo Shop A</h3><p>Authorized demo shop. Order sync enabled, inventory sync in review mode.</p></div>
-            <div class="module-card"><h3>Demo Shop B</h3><p>Authorized demo shop. Product and logistics modules enabled.</p></div>
+        <section class="section" id="integrations">
+          <h2>Marketplace Integration Center</h2>
+          <p>Shopee is marked as pending official API approval. Lazada, Ruten and Amazon are shown as marketplace workflow demos and demo connector designs, not production authorizations.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Marketplace</th><th>Integration Status</th><th>Order Import</th><th>SKU Mapping</th><th>Inventory Sync</th><th>Logistics Workflow</th><th>Last Sync Demo Time</th><th>Note</th></tr></thead>
+              <tbody id="integration-rows"></tbody>
+            </table>
           </div>
         </section>
 
         <section class="section" id="orders">
-          <h2>Order Synchronization Demo</h2>
-          <p>Masked fake orders showing how Shopee order data becomes WMS work items.</p>
+          <h2>Other Marketplace Orders</h2>
+          <p>Lazada, Ruten and Amazon demo orders show how non-Shopee marketplace records can be normalized into WMS order and fulfillment workflows. Buyer data is masked and address detail is city-only.</p>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Order No</th><th>Shop</th><th>Status</th><th>Buyer</th><th>Address</th><th>Picking Status</th></tr></thead>
-              <tbody id="order-rows"></tbody>
+              <thead><tr><th>Marketplace</th><th>Order ID</th><th>Order Status</th><th>SKU</th><th>Product Name</th><th>Qty</th><th>Masked Buyer</th><th>Masked Phone</th><th>City Only Address</th><th>Import Status</th><th>Matched WMS Product</th></tr></thead>
+              <tbody id="marketplace-order-rows"></tbody>
             </table>
           </div>
         </section>
 
         <section class="section" id="sku">
           <h2>Product Master / SKU Mapping</h2>
-          <p>Demo matching between Shopee seller SKUs and WMS product master records.</p>
+          <p>Cross-platform SKU mapping connects marketplace SKUs to WMS product master records before inventory, picking or shipment actions can proceed.</p>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Shopee SKU</th><th>Variation</th><th>WMS Product Code</th><th>Match Status</th></tr></thead>
+              <thead><tr><th>WMS Product ID</th><th>Internal SKU</th><th>Marketplace</th><th>Marketplace SKU</th><th>Product Name</th><th>Variation</th><th>Match Status</th><th>Confidence / Review</th></tr></thead>
               <tbody id="sku-rows"></tbody>
             </table>
           </div>
         </section>
 
-        <section class="section" id="inventory">
-          <h2>Inventory Control</h2>
-          <p>Demo inventory policy: SKU mapping must be reviewed before any stock sync decision. Numbers shown here are fake.</p>
-          <div class="module-grid">
-            <div class="module-card"><h3>Available stock</h3><p>Demo quantity: 128 units.</p></div>
-            <div class="module-card"><h3>Reserved stock</h3><p>Demo quantity: 14 units reserved by fake orders.</p></div>
+        <section class="section" id="inbound">
+          <h2>Inbound / Receiving Management</h2>
+          <p>Purchase, inbound, counting and receiving workflows are shown with demo suppliers and quantities. No production purchasing or supplier data is included.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Purchase Batch</th><th>Supplier</th><th>Expected Qty</th><th>Received Qty</th><th>Checking Status</th><th>Exception Status</th></tr></thead>
+              <tbody id="inbound-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="locations">
+          <h2>Warehouse / Location Management</h2>
+          <p>Demo location controls show cabinet number, warehouse zone, route planning, missing location queues and abnormal position handling.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cabinet / Location</th><th>Warehouse</th><th>Route</th><th>Product</th><th>Location Status</th><th>Exception</th></tr></thead>
+              <tbody id="location-rows"></tbody>
+            </table>
           </div>
         </section>
 
         <section class="section" id="picking">
-          <h2>Picking Tasks</h2>
-          <p>Fake picking batches created after masked Shopee orders are imported and mapped to WMS product codes.</p>
-          <div class="module-grid">
-            <div class="module-card"><h3>DEMO-PICK-001</h3><p>12 orders, 38 items, Zone A, status In progress.</p></div>
-            <div class="module-card"><h3>DEMO-PICK-002</h3><p>8 orders, 21 items, Zone B, status Pending.</p></div>
+          <h2>Outbound / Picking Management</h2>
+          <p>This is the WMS fulfillment workflow: marketplace orders become picking batches, baskets, shortage review, replenishment queues and logistics readiness.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Picking Batch</th><th>Basket</th><th>Order Count</th><th>Item Count</th><th>Zone</th><th>Picker</th><th>Picking Status</th><th>Shortage</th><th>Logistics Status</th></tr></thead>
+              <tbody id="picking-rows"></tbody>
+            </table>
           </div>
         </section>
 
-        <section class="section" id="shipment">
-          <h2>Shipment Workflow</h2>
-          <p>Demo workflow from order import to picking, packing, label readiness and shipment handoff.</p>
-          <ol class="steps">
-            <li><strong>Import</strong><p>Masked demo order enters WMS.</p></li>
-            <li><strong>Pick</strong><p>Picking task is assigned.</p></li>
-            <li><strong>Pack</strong><p>Items are packed by demo status.</p></li>
-            <li><strong>Ship</strong><p>Demo logistics status is updated.</p></li>
-          </ol>
-        </section>
-
-        <section class="section" id="logistics">
-          <h2>Logistics Tracking</h2>
-          <p>Fake logistics examples only. No real tracking number or shipment label is displayed.</p>
-          <div class="module-grid">
-            <div class="module-card"><h3>DEMO-TRACK-001</h3><p>Shopee Xpress Demo, status READY_TO_SHIP.</p></div>
-            <div class="module-card"><h3>DEMO-TRACK-002</h3><p>Demo Convenience Store, status PICKUP_DONE.</p></div>
+        <section class="section" id="staff">
+          <h2>Staff Efficiency Management</h2>
+          <p>Demo productivity statistics help reviewers understand staff-level operation visibility without exposing real employee data.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Staff</th><th>Picked Items</th><th>Avg Time / Order</th><th>Receiving Completed</th><th>Exceptions</th><th>Summary</th></tr></thead>
+              <tbody id="staff-rows"></tbody>
+            </table>
           </div>
         </section>
 
         <section class="section" id="logs">
-          <h2>API Sync Logs</h2>
-          <p>All request IDs and API results are fake examples for Shopee Open Platform review.</p>
+          <h2>API / Sync Logs</h2>
+          <p>Logs include other marketplace demo sync events and planned Shopee official API events. Request IDs are demo identifiers and no real token or credential is present.</p>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Time</th><th>API Action</th><th>Result</th><th>Request ID</th><th>Message</th></tr></thead>
-              <tbody id="api-log-rows"></tbody>
+              <thead><tr><th>Provider</th><th>Endpoint / Module</th><th>Action</th><th>Result</th><th>Request ID Demo</th><th>Timestamp</th><th>Note</th></tr></thead>
+              <tbody id="sync-log-rows"></tbody>
             </table>
           </div>
         </section>
 
         <section class="section" id="security">
-          <h2>Security & Privacy Controls</h2>
-          <div class="module-grid">
-            <div class="module-card"><h3>Least privilege</h3><p>Only required permissions are requested for the first-phase workflows.</p></div>
-            <div class="module-card"><h3>No unmasked PII</h3><p>Unmasked sensitive buyer data is not requested in the first phase.</p></div>
-            <div class="module-card"><h3>Backend-only credentials</h3><p>API credentials are not exposed to frontend pages in the production design.</p></div>
-            <div class="module-card"><h3>Audit visibility</h3><p>Sync logs and operator actions are planned for production traceability.</p></div>
+          <h2>Security & Privacy Center</h2>
+          <div class="module-grid three">
+            <div class="module-card"><h3>Review-only account</h3><p>The reviewer account is read-only and only opens review environment pages.</p></div>
+            <div class="module-card"><h3>Masked PII</h3><p>Buyer names, phone values and addresses are masked or reduced to city-only examples.</p></div>
+            <div class="module-card"><h3>No production DB</h3><p>The site is static and has no production database connection.</p></div>
+            <div class="module-card"><h3>First phase privacy</h3><p>No unmasked PII permission is requested in the first phase.</p></div>
+            <div class="module-card"><h3>Credential handling</h3><p>Token encryption is planned for production backend storage; no credential is exposed here.</p></div>
+            <div class="module-card"><h3>Least privilege</h3><p>Production API scopes are planned around the minimum required ERP/WMS workflows.</p></div>
+            <div class="module-card"><h3>Audit logs</h3><p>Sync and operator activity logs are part of the production design.</p></div>
+            <div class="module-card"><h3>HTTPS deployment</h3><p>Cloudflare Pages provides HTTPS for the review environment.</p></div>
+            <div class="module-card"><h3>Official API only</h3><p>No scraping, no CAPTCHA bypass and no unofficial data extraction are used.</p></div>
           </div>
-          <div class="callout">Demo data only. No production database, production uploads, real Shopee API request, token, secret, buyer PII, order number, shipment number or product image is included.</div>
+          <div class="callout">Review Environment / Demo Data / No Production DB. This static review site contains only demo marketplace records and masked operational examples.</div>
         </section>
       </div>
 
-      <footer class="footer">Demo environment only. All data shown here is fake and masked for review purposes.</footer>
+      <footer class="footer">Review Environment only. All data shown here is demo data or masked data for Shopee Open Platform review.</footer>
     </main>
   </div>
   <script src="/assets/app.js"></script>
