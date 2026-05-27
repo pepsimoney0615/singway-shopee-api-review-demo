@@ -136,3 +136,36 @@ Review URL format:
 ```text
 https://<your-cloudflare-pages-domain>/demo/login/
 ```
+
+## momo API Test Environment
+
+This repository includes a local-only momo API smoke-test script:
+
+```bash
+npm run test:momo
+```
+
+The script reads these values from local environment variables or a local `.env` file:
+
+```text
+MOMO_API_TOKEN
+MOMO_API_SECRET
+MOMO_API_BASE_URL
+```
+
+Security rules:
+
+- Put real momo credentials only in local `.env`.
+- Do not commit `.env`.
+- Commit only `.env.example` with placeholder values.
+- The script reports whether required values are present, but never prints credential values.
+- The script reports API status and elapsed time, but does not print request headers or response bodies.
+- The repository must not contain live momo credentials, seller credentials, API keys, partner keys or private key files.
+
+Before pushing any momo-related change, verify:
+
+```bash
+git ls-files .env '.env.*' 'secrets/*' 'credentials/*' '*.key' '*.pem'
+```
+
+The command should return no tracked secret files.

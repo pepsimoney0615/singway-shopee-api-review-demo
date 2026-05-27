@@ -1,0 +1,9 @@
+{
+  "name": "singway-shopee-api-review-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:momo": "node scripts/momo-api-smoke-test.mjs"
+  }
+}
