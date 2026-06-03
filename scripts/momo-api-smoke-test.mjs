@@ -2,9 +2,10 @@ import fs from "node:fs";
 
 const REQUIRED_ENV = [
   "MOMO_API_TOKEN",
-  "MOMO_API_SECRET",
   "MOMO_API_BASE_URL"
 ];
+
+const SMOKE_TEST_PATH = "/apiv2/VendorApi/FileQuote";
 
 function loadLocalEnv(filePath = ".env") {
   if (!fs.existsSync(filePath)) return;
@@ -47,10 +48,35 @@ function safeUrl(rawUrl) {
   }
 }
 
+function buildSmokeTestUrl(baseUrl) {
+  const parsed = new URL(baseUrl);
+  parsed.pathname = `${parsed.pathname.replace(/\/$/, "")}${SMOKE_TEST_PATH}`;
+  parsed.search = "";
+  parsed.hash = "";
+  return parsed;
+}
+
+function summarizeResponseKeys(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return [];
+  }
+  return Object.keys(value).sort();
+}
+
 loadLocalEnv();
 
 const { summary, missing } = requireEnv();
 console.log("momo credential check:", summary);
+
+if (summary.MOMO_API_BASE_URL === "missing") {
+  console.error("momo API smoke test configuration error:", {
+    MOMO_API_TOKEN: summary.MOMO_API_TOKEN,
+    MOMO_API_BASE_URL: "missing",
+    errorCode: "MISSING_API_BASE_URL",
+    message: "API base URL is required for HTTP smoke test. Do not use webhook callback URL as API base URL."
+  });
+  process.exit(1);
+}
 
 if (missing.length > 0) {
   console.error("Missing required momo environment variables:", missing.join(", "));
@@ -58,7 +84,7 @@ if (missing.length > 0) {
 }
 
 const baseUrl = process.env.MOMO_API_BASE_URL;
-const parsedUrl = new URL(baseUrl);
+const parsedUrl = buildSmokeTestUrl(baseUrl);
 
 if (parsedUrl.protocol !== "https:") {
   console.error("MOMO_API_BASE_URL must use HTTPS.");
@@ -69,27 +95,44 @@ const startedAt = Date.now();
 let response;
 
 try {
+  const headers = {
+    Authorization: `Bearer ${process.env.MOMO_API_TOKEN}`,
+    "Content-Type": "application/x-www-form-urlencoded"
+  };
+
   response = await fetch(parsedUrl, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.MOMO_API_TOKEN}`,
-      "X-Momo-Api-Secret": process.env.MOMO_API_SECRET,
-      Accept: "application/json"
-    }
+    method: "POST",
+    headers,
+    body: new URLSearchParams()
   });
 } catch (error) {
   console.error("momo API smoke test failed:", {
-    url: safeUrl(baseUrl),
+    url: safeUrl(parsedUrl.href),
     error: error.name,
+    errorCode: "REQUEST_FAILED",
     elapsedMs: Date.now() - startedAt
   });
   process.exit(1);
 }
 
+const responseText = await response.text();
+let responseBody;
+try {
+  responseBody = responseText ? JSON.parse(responseText) : undefined;
+} catch {
+  responseBody = undefined;
+}
+
 console.log("momo API smoke test:", {
-  url: safeUrl(baseUrl),
+  url: safeUrl(parsedUrl.href),
   status: response.status,
-  ok: response.ok,
+  hasSuccessField: Boolean(
+    responseBody &&
+      typeof responseBody === "object" &&
+      !Array.isArray(responseBody) &&
+      Object.hasOwn(responseBody, "success")
+  ),
+  responseKeys: summarizeResponseKeys(responseBody),
   elapsedMs: Date.now() - startedAt
 });
 

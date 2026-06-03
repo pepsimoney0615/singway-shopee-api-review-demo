@@ -4,20 +4,21 @@ const AUTH_KEY = "singway_erp_wms_review_auth_v2";
 
 const integrations = [
   ["Shopee", "Pending official API approval", "Official seller authorization planned", "Shopee planned channel mapping", "Inventory workflow prepared", "Official logistics workflow planned", "Import log available", "2026-05-27 10:05"],
+  ["mo店+", "API permission received", "OrderQuery intentionally not used", "Low-risk FileQuote endpoint verified", "Full production workflow not exposed", "Full production workflow not exposed", "Smoke test completed from whitelisted fixed IPv4", "2026-06-03 18:20"],
   ["Lazada", "Demo review dataset available", "Marketplace order workflow demonstrated", "SKU mapping demonstrated", "Inventory workflow demonstrated", "Logistics workflow demonstrated", "Import / sync log demo available", "2026-05-27 09:40"],
   ["Ruten", "Demo review dataset available", "Marketplace order workflow demonstrated", "Manual review queue demonstrated", "Inventory workflow demonstrated", "Logistics workflow demonstrated", "Import / sync log demo available", "2026-05-27 09:22"],
   ["Amazon", "Connector design preview", "Marketplace order workflow demonstrated", "SKU mapping demonstrated", "Inventory workflow demonstrated", "Fulfillment workflow demonstrated", "Import / sync log demo available", "2026-05-27 08:55"]
 ];
 
 const marketplaceOrders = [
-  ["Lazada", "LZD-REVIEW-20260525-001", "READY_TO_SHIP", "LZD-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 2, "Buyer A", "09********", "Taipei City", "Imported", "Matched", "Reserved", "Picking queued", "Shipment pending"],
-  ["Lazada", "LZD-REVIEW-20260525-002", "PAID", "LZD-POUCH-GR-S", "INT-PO-014", "Travel Pouch", "Gray / Small", 1, "Buyer B", "09********", "Taichung City", "Imported", "Review needed", "Hold", "Waiting SKU review", "Not ready"],
-  ["Lazada", "LZD-REVIEW-20260525-003", "READY_TO_SHIP", "LZD-LABEL-WH-120", "INT-LB-008", "Storage Label Pack", "White / 120 labels", 4, "Buyer C", "09********", "Tainan City", "Imported", "Matched", "Reserved", "Picked", "Ready to pack"],
-  ["Ruten", "RT-REVIEW-20260525-004", "CONFIRMED", "RTN-TIE-BK-20", "INT-CT-011", "Desk Cable Tie", "Black / 20 pcs", 3, "Buyer D", "09********", "New Taipei City", "Imported", "Matched", "Reserved", "In progress", "Shipment pending"],
-  ["Ruten", "RT-REVIEW-20260525-005", "READY_TO_PICK", "RTN-BOX-SM-10", "INT-BX-022", "Storage Box", "Small / 10 pcs", 2, "Buyer E", "09********", "Kaohsiung City", "Imported", "Manual review", "Review mode", "Review queue", "Not ready"],
-  ["Ruten", "RT-REVIEW-20260525-006", "PAID", "RTN-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 1, "Buyer F", "09********", "Hsinchu City", "Imported", "Matched", "Reserved", "Picked", "Ready to pack"],
-  ["Amazon", "AMZ-REVIEW-20260525-007", "UNSHIPPED", "AMZ-BOX-SM-10", "INT-BX-022", "Storage Box", "Small / 10 pcs", 2, "Buyer G", "09********", "Taoyuan City", "Imported", "Manual review", "Review mode", "Waiting SKU review", "Not ready"],
-  ["Shopee Planned", "SHP-REVIEW-20260525-008", "PENDING_APPROVAL", "SHP-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 1, "Buyer H", "09********", "Taipei City", "Preview only", "Planned mapping", "Review mode", "Preview only", "Pending official API approval"]
+  ["Lazada", "LZD-REVIEW-20260525-001", "READY_TO_SHIP", "LZD-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 2, "Masked record A", "masked", "Taipei City", "Imported", "Matched", "Reserved", "Picking queued", "Shipment pending"],
+  ["Lazada", "LZD-REVIEW-20260525-002", "PAID", "LZD-POUCH-GR-S", "INT-PO-014", "Travel Pouch", "Gray / Small", 1, "Masked record B", "masked", "Taichung City", "Imported", "Review needed", "Hold", "Waiting SKU review", "Not ready"],
+  ["Lazada", "LZD-REVIEW-20260525-003", "READY_TO_SHIP", "LZD-LABEL-WH-120", "INT-LB-008", "Storage Label Pack", "White / 120 labels", 4, "Masked record C", "masked", "Tainan City", "Imported", "Matched", "Reserved", "Picked", "Ready to pack"],
+  ["Ruten", "RT-REVIEW-20260525-004", "CONFIRMED", "RTN-TIE-BK-20", "INT-CT-011", "Desk Cable Tie", "Black / 20 pcs", 3, "Masked record D", "masked", "New Taipei City", "Imported", "Matched", "Reserved", "In progress", "Shipment pending"],
+  ["Ruten", "RT-REVIEW-20260525-005", "READY_TO_PICK", "RTN-BOX-SM-10", "INT-BX-022", "Storage Box", "Small / 10 pcs", 2, "Masked record E", "masked", "Kaohsiung City", "Imported", "Manual review", "Review mode", "Review queue", "Not ready"],
+  ["Ruten", "RT-REVIEW-20260525-006", "PAID", "RTN-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 1, "Masked record F", "masked", "Hsinchu City", "Imported", "Matched", "Reserved", "Picked", "Ready to pack"],
+  ["Amazon", "AMZ-REVIEW-20260525-007", "UNSHIPPED", "AMZ-BOX-SM-10", "INT-BX-022", "Storage Box", "Small / 10 pcs", 2, "Masked record G", "masked", "Taoyuan City", "Imported", "Manual review", "Review mode", "Waiting SKU review", "Not ready"],
+  ["Shopee Planned", "SHP-REVIEW-20260525-008", "PENDING_APPROVAL", "SHP-HC-BEIGE-6", "INT-HC-001", "Hair Clip Set", "Beige / 6 pcs", 1, "Masked record H", "masked", "Taipei City", "Preview only", "Planned mapping", "Review mode", "Preview only", "Pending official API approval"]
 ];
 
 const skuMappings = [
@@ -60,6 +61,8 @@ const staffRows = [
 ];
 
 const syncLogs = [
+  ["mo店+", "POST /apiv2/VendorApi/FileQuote", "low-risk smoke test from fixed IPv4 114.33.182.95", "success", "REVIEW-MOMO-001", "2026-06-03 18:20", "HTTP 200; response keys summary: data, success; hasSuccessField: true; no response body or live credential exposed"],
+  ["mo店+", "OrderQuery", "intentionally not used for review smoke test", "not executed", "REVIEW-MOMO-002", "2026-06-03 18:20", "avoids retrieving buyer PII, order details, address data, or phone data"],
   ["Lazada Review Dataset", "marketplace.orders.import", "import de-identified order records", "success", "REVIEW-LZD-001", "2026-05-27 09:40", "demo/de-identified review dataset, no live API credential used"],
   ["Lazada Review Dataset", "marketplace.sku.mapping", "map marketplace SKUs to internal SKU", "success", "REVIEW-LZD-002", "2026-05-27 09:42", "cross-platform SKU mapping demonstrated"],
   ["Ruten Review Dataset", "marketplace.orders.import", "normalize de-identified order records", "success", "REVIEW-RTN-001", "2026-05-27 09:22", "marketplace order integration workflow demonstrated"],

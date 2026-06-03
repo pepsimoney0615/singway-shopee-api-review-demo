@@ -19,6 +19,7 @@
       <nav class="nav" aria-label="Review environment sections">
         <a class="active" href="#executive">Executive Dashboard</a>
         <a href="#integrations">Marketplace Integration Center</a>
+        <a href="#momo-evidence">momo API Evidence</a>
         <a href="#orders">Other Marketplace Orders</a>
         <a href="#sku">Product Master / SKU Mapping</a>
         <a href="#inbound">Inbound / Receiving</a>
@@ -40,7 +41,7 @@
       </header>
 
       <section class="metrics" id="executive" aria-label="Executive Dashboard">
-        <div class="metric"><span>Marketplace integrations</span><strong>4</strong><small>Shopee pending + marketplace review workflows</small></div>
+        <div class="metric"><span>Marketplace integrations</span><strong>5</strong><small>Shopee pending + marketplace review workflows</small></div>
         <div class="metric"><span>WMS orders</span><strong>128</strong><small>De-identified review order pool</small></div>
         <div class="metric"><span>Inbound tasks</span><strong>4</strong><small>Receiving and checking workflow</small></div>
         <div class="metric"><span>Picking progress</span><strong>72%</strong><small>Cross-platform WMS workflow</small></div>
@@ -61,12 +62,25 @@
 
         <section class="section" id="integrations">
           <h2>Marketplace Integration Center</h2>
-          <p>Shopee is marked as pending official API approval. Lazada, Ruten and Amazon are shown as marketplace order integration workflow demonstrations using demo and de-identified review datasets.</p>
+          <p>Shopee is marked as pending official API approval. mo店+ API permission received and a low-risk smoke test was completed from the whitelisted fixed IPv4. Other marketplace rows use demo and de-identified review datasets.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Marketplace</th><th>Integration Status</th><th>Order Import Workflow</th><th>SKU Mapping Workflow</th><th>Inventory Workflow</th><th>Logistics Workflow</th><th>Import / Sync Log</th><th>Last Review Sync Time</th></tr></thead>
               <tbody id="integration-rows"></tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="momo-evidence">
+          <h2>momo API Evidence</h2>
+          <p>mo店+ API permission received. Smoke test completed from whitelisted fixed IPv4 114.33.182.95 using the low-risk FileQuote endpoint. Full production workflow is not exposed in this review demo.</p>
+          <div class="module-grid three">
+            <div class="module-card"><h3>Connection evidence</h3><p>API Base URL: https://api3p.momo.com.tw. Verified endpoint: POST /apiv2/VendorApi/FileQuote. HTTP status: 200.</p></div>
+            <div class="module-card"><h3>Response summary</h3><p>Response structure summary: data, success. hasSuccessField: true. Full response body is not shown in the review environment.</p></div>
+            <div class="module-card"><h3>Credential boundary</h3><p>Authorization uses Bearer token on the backend smoke test only. No live credential is exposed in GitHub, Cloudflare Pages, frontend JavaScript, README, or review UI.</p></div>
+            <div class="module-card"><h3>PII avoidance</h3><p>OrderQuery was intentionally not used for the review smoke test to avoid retrieving buyer PII, order details, address data, or phone data.</p></div>
+            <div class="module-card"><h3>IP whitelist</h3><p>Test source IP matches the mo店+ A103 application IP: 114.33.182.95.</p></div>
+            <div class="module-card"><h3>Review boundary</h3><p>Low-risk FileQuote endpoint verified. This is review-only status evidence and does not expose a live production workflow.</p></div>
           </div>
         </section>
 
@@ -138,7 +152,7 @@
 
         <section class="section" id="logs">
           <h2>Import / Sync Logs</h2>
-          <p>Logs include other marketplace review dataset imports and planned Shopee official API authorization events. Request IDs are review identifiers and no live API credential is present.</p>
+          <p>Logs include other marketplace review dataset imports, the mo店+ FileQuote smoke test evidence, and planned Shopee official API authorization events. Request IDs are review identifiers and no live API credential is present.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Provider</th><th>Endpoint / Module</th><th>Action</th><th>Result</th><th>Request ID Demo</th><th>Timestamp</th><th>Note</th></tr></thead>
@@ -149,13 +163,15 @@
 
         <section class="section" id="security">
           <h2>Security & Privacy Center</h2>
-          <div class="callout"><strong>Security Notice</strong><br>This review environment is read-only and isolated from production WMS systems. It does not connect to production databases, upload folders, spreadsheets, live API tokens, API keys, partner keys, or seller credentials.</div>
+          <div class="callout"><strong>Security Notice</strong><br>This review environment is read-only and isolated from production WMS systems. It does not connect to production databases, upload folders, spreadsheets, live API tokens, API keys, partner keys, or seller credentials. mo店+ smoke test evidence is shown only as a sanitized status summary.</div>
           <div class="module-grid three">
             <div class="module-card"><h3>Review-only account</h3><p>The reviewer account is read-only and only opens review environment pages.</p></div>
             <div class="module-card"><h3>Masked buyer information</h3><p>Buyer names, phone numbers, addresses, order numbers, logistics numbers, and marketplace records are masked, anonymized, or demo review records.</p></div>
             <div class="module-card"><h3>No production DB</h3><p>The site is static and has no production database connection.</p></div>
             <div class="module-card"><h3>First phase privacy</h3><p>No unmasked PII permission is requested in the first phase.</p></div>
             <div class="module-card"><h3>Credential handling</h3><p>Token encryption is planned for production backend storage; no credential is exposed here.</p></div>
+            <div class="module-card"><h3>momo token boundary</h3><p>mo店+ API Token is stored only in local .env or backend environment. It is not exposed in GitHub, Cloudflare Pages, frontend JavaScript, README, or review UI.</p></div>
+            <div class="module-card"><h3>Low-risk smoke test</h3><p>Only POST /apiv2/VendorApi/FileQuote was verified. OrderQuery was not used to avoid buyer PII and order data.</p></div>
             <div class="module-card"><h3>Least privilege</h3><p>Production API scopes are planned around the minimum required ERP/WMS workflows.</p></div>
             <div class="module-card"><h3>Audit logs</h3><p>Import / sync and operator activity logs are part of the production design.</p></div>
             <div class="module-card"><h3>HTTPS deployment</h3><p>Cloudflare Pages provides HTTPS for the review environment.</p></div>

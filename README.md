@@ -19,6 +19,7 @@ The review environment demonstrates:
 - Staff Efficiency Management
 - Import / Sync Logs
 - Security & Privacy Center
+- momo API Evidence
 
 Required paths:
 
@@ -32,7 +33,7 @@ Required paths:
 This review environment uses demo and de-identified review datasets.
 
 - Buyer information, order identifiers, addresses, phone numbers, and logistics numbers are masked or anonymized for review safety.
-- Phone values use masked examples such as `09********`.
+- Phone fields are masked and do not contain real phone numbers.
 - Address values are city-only examples.
 - Order IDs, request IDs, SKU values, product names, purchase batches and tracking-like identifiers are review identifiers.
 - Staff names and supplier names are role-based review labels.
@@ -56,18 +57,43 @@ The account is a static review gate and is intended only for read-only product e
 
 ## Other Marketplace Integration Workflow
 
-The review environment includes Lazada, Ruten and Amazon marketplace workflow demonstrations to show that the ERP/WMS product supports cross-platform order normalization, SKU mapping, inventory control and warehouse fulfillment concepts.
+The review environment includes Lazada, Ruten, Amazon and mo店+ marketplace workflow demonstrations to show that the ERP/WMS product supports cross-platform order normalization, SKU mapping, inventory control and warehouse fulfillment concepts.
 
-These are demo and de-identified review datasets. The site does not claim production API authorization for these marketplaces and does not call their live APIs.
+Lazada, Ruten and Amazon use demo and de-identified review datasets. mo店+ API permission received and the review environment shows only sanitized smoke test evidence. The site does not expose a full production workflow for these marketplaces.
 
 Recommended wording used in the UI:
 
 - Lazada marketplace integration demo
 - Ruten marketplace order integration demo
+- mo店+ API permission received
+- smoke test completed from whitelisted fixed IPv4
+- low-risk FileQuote endpoint verified
+- no live credential exposed in review environment
+- full production workflow not exposed in review demo
 - marketplace order integration workflow
 - cross-platform WMS workflow
 - authorized connector ready
 - import / sync log demo
+
+## momo API Evidence
+
+mo店+ API permission received. A smoke test was completed from the whitelisted fixed IPv4 `114.33.182.95`, matching the mo店+ A103 application IP.
+
+Smoke test summary:
+
+- API Base URL: `https://api3p.momo.com.tw`
+- Verified endpoint: `POST /apiv2/VendorApi/FileQuote`
+- Token usage: `Authorization: Bearer <token>`
+- HTTP status: `200`
+- Response structure summary: `data`, `success`
+- hasSuccessField: `true`
+
+Security boundaries:
+
+- No live token is stored in GitHub, Cloudflare Pages, frontend JavaScript, README, or review UI.
+- No complete response body is stored in the repository or shown in the review UI.
+- `OrderQuery` was intentionally not used for the review smoke test to avoid retrieving buyer PII, order details, address data, or phone data.
+- Full production workflow is not exposed in the review demo.
 
 ## Shopee API Application Context
 
@@ -91,6 +117,7 @@ The static review environment does not call live Shopee APIs and does not store 
 - No production upload folder, spreadsheet source or export folder.
 - No live Shopee, Lazada, Ruten or Amazon API call.
 - No production API credential, partner key, API key or secret key.
+- No live momo credential or complete momo API response body.
 - No unmasked buyer identity, full phone number, full address, live order number, live logistics number or live product image.
 - No write, delete, export or production mutation feature.
 - Official API authorization only in production design.
@@ -149,9 +176,20 @@ The script reads these values from local environment variables or a local `.env`
 
 ```text
 MOMO_API_TOKEN
-MOMO_API_SECRET
 MOMO_API_BASE_URL
 ```
+
+`MOMO_API_SECRET` is not required for this smoke test.
+
+The local smoke test uses:
+
+```text
+POST https://api3p.momo.com.tw/apiv2/VendorApi/FileQuote
+Authorization: Bearer <token>
+Content-Type: application/x-www-form-urlencoded
+```
+
+The confirmed review smoke test result was HTTP `200`, with response keys summary `data`, `success`, and `hasSuccessField: true`.
 
 Security rules:
 
@@ -159,7 +197,8 @@ Security rules:
 - Do not commit `.env`.
 - Commit only `.env.example` with placeholder values.
 - The script reports whether required values are present, but never prints credential values.
-- The script reports API status and elapsed time, but does not print request headers or response bodies.
+- The script reports sanitized API URL, HTTP status, response keys summary, success field presence and elapsed time, but does not print request headers or complete response bodies.
+- Do not use `OrderQuery` in the review smoke test.
 - The repository must not contain live momo credentials, seller credentials, API keys, partner keys or private key files.
 
 Before pushing any momo-related change, verify:
